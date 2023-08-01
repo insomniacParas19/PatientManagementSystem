@@ -10,85 +10,85 @@ using PMS.Models;
 
 namespace PMS.Controllers
 {
-    public class DoctorsController : Controller
+    public class PatientsController : Controller
     {
-        private readonly PMSDbContext _context = new();
+       PMSDbContext _context = new();
 
-        // GET: Doctors
+               // GET: Patients
         public async Task<IActionResult> Index()
         {
-            var pMSDbContext = _context.Doctors.Include(d => d.Department);
+            var pMSDbContext = _context.Patients.Include(p => p.Doctor);
             return View(await pMSDbContext.ToListAsync());
         }
 
-        // GET: Doctors/Details/5
+        // GET: Patients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Doctors == null)
+            if (id == null || _context.Patients == null)
             {
                 return NotFound();
             }
 
-            var doctor = await _context.Doctors
-                .Include(d => d.Department)
+            var patient = await _context.Patients
+                .Include(p => p.Doctor)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (doctor == null)
+            if (patient == null)
             {
                 return NotFound();
             }
 
-            return View(doctor);
+            return View(patient);
         }
 
-        // GET: Doctors/Create
+        // GET: Patients/Create
         public IActionResult Create()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name");
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name");
             return View();
         }
 
-        // POST: Doctors/Create
+        // POST: Patients/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Contact,Specialist,Credentials,DepartmentId")] Doctor doctor)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,Dob,Gender,DoctorId")] Patient patient)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(doctor);
+                _context.Add(patient);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", doctor.DepartmentId);
-            return View(doctor);
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name", patient.DoctorId);
+            return View(patient);
         }
 
-        // GET: Doctors/Edit/5
+        // GET: Patients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Doctors == null)
+            if (id == null || _context.Patients == null)
             {
                 return NotFound();
             }
 
-            var doctor = await _context.Doctors.FindAsync(id);
-            if (doctor == null)
+            var patient = await _context.Patients.FindAsync(id);
+            if (patient == null)
             {
                 return NotFound();
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Name", doctor.DepartmentId);
-            return View(doctor);
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name", patient.DoctorId);
+            return View(patient);
         }
 
-        // POST: Doctors/Edit/5
+        // POST: Patients/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Contact,Specialist,Credentials,DepartmentId")] Doctor doctor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Dob,Gender,DoctorId")] Patient patient)
         {
-            if (id != doctor.Id)
+            if (id != patient.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace PMS.Controllers
             {
                 try
                 {
-                    _context.Update(doctor);
+                    _context.Update(patient);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DoctorExists(doctor.Id))
+                    if (!PatientExists(patient.Id))
                     {
                         return NotFound();
                     }
@@ -113,51 +113,51 @@ namespace PMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", doctor.DepartmentId);
-            return View(doctor);
+            ViewData["DoctorId"] = new SelectList(_context.Doctors, "Id", "Name", patient.DoctorId);
+            return View(patient);
         }
 
-        // GET: Doctors/Delete/5
+        // GET: Patients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Doctors == null)
+            if (id == null || _context.Patients == null)
             {
                 return NotFound();
             }
 
-            var doctor = await _context.Doctors
-                .Include(d => d.Department)
+            var patient = await _context.Patients
+                .Include(p => p.Doctor)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (doctor == null)
+            if (patient == null)
             {
                 return NotFound();
             }
 
-            return View(doctor);
+            return View(patient);
         }
 
-        // POST: Doctors/Delete/5
+        // POST: Patients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Doctors == null)
+            if (_context.Patients == null)
             {
-                return Problem("Entity set 'PMSDbContext.Doctors'  is null.");
+                return Problem("Entity set 'PMSDbContext.Patients'  is null.");
             }
-            var doctor = await _context.Doctors.FindAsync(id);
-            if (doctor != null)
+            var patient = await _context.Patients.FindAsync(id);
+            if (patient != null)
             {
-                _context.Doctors.Remove(doctor);
+                _context.Patients.Remove(patient);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DoctorExists(int id)
+        private bool PatientExists(int id)
         {
-            return (_context.Doctors?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Patients?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

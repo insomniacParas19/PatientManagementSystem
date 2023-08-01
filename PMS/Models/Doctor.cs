@@ -1,5 +1,5 @@
 ﻿
-
+namespace PMS.Models;
 using PMS.Enums;
 
 public class Doctor

@@ -5,7 +5,7 @@ namespace PMS.Controllers;
 
 public class DepartmentController : Controller
 {
-    PMSDbContext db= new();
+    PMSDbContext db = new();
 
     [HttpGet]
     public IActionResult Index()
@@ -19,7 +19,7 @@ public class DepartmentController : Controller
     [HttpGet]
     public IActionResult Add()
     {
-       
+
         return View();
     }
 
@@ -34,14 +34,14 @@ public class DepartmentController : Controller
     [HttpGet]
     public IActionResult Edit(int id)
     {
-       var department= db.Departments.Find(id);
+        var department = db.Departments.Find(id);
         return View(department);
     }
-    
+
     [HttpPost]
-    public IActionResult Edit(Department department) 
-    { 
-    db.Departments.Update(department);
+    public IActionResult Edit(Department department)
+    {
+        db.Departments.Update(department);
         db.SaveChanges();
         return RedirectToAction("Index");
     }
