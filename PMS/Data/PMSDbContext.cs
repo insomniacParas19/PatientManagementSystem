@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PMS.Models;
 
 namespace PMS.Data;
 
-public class PMSDbContext: DbContext
+public class PMSDbContext: IdentityDbContext
 {
     public DbSet<Department> Departments { get; set; }
     public DbSet<Doctor> Doctors { get; set; }

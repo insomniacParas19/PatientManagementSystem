@@ -2,15 +2,17 @@
 
 @{
     ViewData["Title"] = "Index";
+    <link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
 }
-
+<div class="container-fluid py-4">
 <p>
-    <h2 class="float-start">Patients</h2>
+    <h3 class="float-start">Patients</h3>
 
     <a asp-action="Create" class="btn btn-success float-end ">Add Patient</a>
 </p>
-<table class="table table-info py-3 table-bordered table-hover">
-    <thead>
+</div>
+<table class="content-table">
+    <thead class="table-primary">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -51,9 +53,9 @@
                 @Html.DisplayFor(modelItem => item.Doctor.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i href=""class="bi bi-pencil-square text-warning"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><i href="" class="bi bi-info-circle text-info"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><i href="" class="bi bi-trash3-fill text-danger"></i></a>
             </td>
         </tr>
 }

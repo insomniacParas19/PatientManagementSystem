@@ -1,0 +1,44 @@
+﻿.navcontainer {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+.nav-link{
+transition: all 0.2s;
+position: relative;
+}
+
+.nav-link:hover {
+
+
+}
+
+.nav-link::after{
+    content: '';
+    opacity: 0;
+    transition: all 0.2s;
+    height: 3px;
+    width: 100%;
+    background-color:goldenrod;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+    .nav-item::after {
+        content: '';
+        opacity: 0;
+        transition: all 0.2s;
+        height: 2px;
+        width: 100%;
+        background-color: goldenrod;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+.nav-link:hover::after{
+    opacity: 1;
+    
+}
+

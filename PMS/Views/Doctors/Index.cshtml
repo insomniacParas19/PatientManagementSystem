@@ -2,19 +2,20 @@
 
 @{
     ViewData["Title"] = "Index";
+    <link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
 }
 <div class="container-fluid py-4">
 
     <p>
-        <h2 class="float-start">Doctors</h2>
+        <h3 class="float-start">Doctors</h3>
 
-        <a asp-action="Create" class="btn btn-success float-end ">Add Doctor</a>
+        <a asp-action="Create" class="btn float-end ">Add Doctor</a>
 
     </p>
 </div>
-<table class="table table-info py-3 table-bordered table-hover">
-    <thead >
-        <tr>
+<table class="content-table">
+    <thead class="table-primary">
+        <tr class="active-row">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -30,13 +31,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Department)
             </th>
-            <th></th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr >
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>

@@ -9,26 +9,27 @@
   <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/PMS.styles.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
 </head>
 
 <body>
   <header>
-    <div class="px-3 py-2 bg-dark text-white">
+    <div class=" navcontainer px-3 py-2 bg-dark text-success">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <img src="./images/navlogo.png" height="40px" class="rounded-circle" alt="..."><b>Patient Management System
+            <img src="/images/navlogo.png" height="40px" class="rounded-circle" alt="..."><b>Patient Management System
           </a>
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="/home" class="nav-link text-primary">
+              <a href="/home" class="nav-link text-warning">
                 <i class="bi bi-house-heart d-block mx-auto mb-1" width="24" height="24"></i>
                 Home
               </a>
             </li>
             <li>
-              <a href="/doctors" class="nav-link text-white">
+              <a href="/doctors" class="nav-link text-warning">
                 <i class="bi bi-person d-block mx-auto mb-1" width="24" height="24"></i>
                 Doctor
               </a>
@@ -45,13 +46,13 @@
               </ul>
             </li>
             <li>
-            <a href="/patients" class="nav-link  text-white">
+            <a href="/patients" class="nav-link  text-warning">
                 <i class="bi bi-people d-block mx-auto mb-1" width="24" height="24"></i>
                 Patient
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <a href="#" class="nav-link text-warning">
                 <i class="bi bi-plus d-block mx-auto mb-1" width="24" height="24"></i>
                 Appointments
               </a>
@@ -66,10 +67,11 @@
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
 
-        <div class="text-end">
-          <button type="button" class="btn btn-light text-dark me-2">Login</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
-        </div>
+         <div class="text-end">
+             <partial name="_LoginPartial" />
+                    <!-- <button type="button" class="btn btn-light text-dark me-2">Login</button>
+                    <button type="button" class="btn btn-primary">Sign-up</button> -->
+                </div>
       </div>
     </div>
   </header>

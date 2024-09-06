@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +10,8 @@ namespace PMS.Controllers
     public class DoctorsController : Controller
     {
         private readonly PMSDbContext _context = new();
+        
+
 
         // GET: Doctors
         public async Task<IActionResult> Index()
@@ -57,8 +56,9 @@ namespace PMS.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(doctor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                 await _context.SaveChangesAsync();
+               return RedirectToAction(nameof(Index));
+
             }
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "Id", "Id", doctor.DepartmentId);
             return View(doctor);
